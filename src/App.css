@@ -11,11 +11,11 @@
 }
 
 .main-content {
-  flex: 1;
-  overflow: hidden;
-  display: flex;
+  flex: 1; /* Take remaining vertical space */
+  overflow: hidden; /* Prevent this area itself from scrolling */
+  display: flex; /* Use flex for child positioning */
   flex-direction: column;
-  min-height: 0;
+  min-height: 0; /* Crucial for flex children like ChatInterface */
 }
 
 @media (max-width: 768px) {
