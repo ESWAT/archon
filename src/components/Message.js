@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown'; // Import ReactMarkdown
 import './Message.css';
 
 const Message = ({ message }) => {
