@@ -28,8 +28,13 @@
   --border-light: #444444;       /* Lighter border */
 }
 
-body {
+html, body {
+  height: 100%; /* Ensure html and body take full height */
+  overflow: hidden; /* Prevent scrolling on the body itself */
   margin: 0;
+}
+
+body {
   /* Using system fonts like Vercel */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
