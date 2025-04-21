@@ -227,8 +227,9 @@ const ChatInterface = (props) => {
         )}
         
         <div className={`input-wrapper ${loading ? 'loading' : ''}`}>
+          {/* Assign the ref to the input */}
           <input
-            ref={inputRef} // Assign the ref to the input
+            ref={inputRef} 
             type="text"
             value={input}
             onChange={handleInputChange}

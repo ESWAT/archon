@@ -10,13 +10,14 @@ const Header = ({ onClearChat }) => {
     <header className="header">
       <div className="logo">
         {/* Replace FaLanguage with a styled span containing Hangul */}
-        <span className="logo-icon-hangul">글</span> 
+        <span className="logo-icon-hangul">글</span>
         <h1>Archon</h1>
       </div>
       <nav className="nav-buttons">
         {location.pathname === '/settings' ? (
           <Link to="/" className="nav-link">
-            <FaComment size={16} /> {/* Add FaComment icon */}
+            {/* Add FaComment icon */}
+            <FaComment size={16} /> 
             <span>Chat</span>
           </Link>
         ) : (
