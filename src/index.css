@@ -1,35 +1,37 @@
 :root {
-  --bg-primary: #121212;
-  --bg-secondary: #1e1e1e;
-  --bg-tertiary: #2a2a2a;
-  --text-primary: #f0f0f0;
-  --text-secondary: #b0b0b0;
-  --accent-primary: #7c4dff;
-  --accent-secondary: #5e35b1;
-  --accent-hover: #9575cd;
-  --error: #cf6679;
-  --success: #03dac6;
-  --border: #383838;
-  --shadow: rgba(0, 0, 0, 0.3);
-  --message-user: #7c4dff;
-  --message-assistant: #2a2a2a;
-  --scrollbar-thumb: #555;
-  --scrollbar-track: #222;
+  /* Vercel-like Dark Palette */
+  --bg-primary: #000000;         /* Black background */
+  --bg-secondary: #111111;       /* Slightly lighter gray for secondary elements */
+  --bg-tertiary: #222222;        /* Lighter gray for tertiary elements */
+  --text-primary: #ffffff;       /* White text */
+  --text-secondary: #888888;     /* Gray for secondary text */
+  --accent-primary: #ffffff;     /* White accent (can be changed) */
+  --accent-secondary: #dddddd;   /* Lighter gray accent */
+  --accent-hover: #cccccc;       /* Hover accent */
+  --error: #ff6666;             /* Error color */
+  --success: #33cc99;           /* Success color */
+  --border: #333333;             /* Subtle border color */
+  --shadow: rgba(255, 255, 255, 0.05); /* Very subtle white shadow */
+  --message-user: #ffffff;       /* User message text color */
+  --message-user-bg: #222222;    /* User message background */
+  --message-assistant: #cccccc;  /* Assistant message text color */
+  --message-assistant-bg: #111111; /* Assistant message background */
+  --scrollbar-thumb: #444444;
+  --scrollbar-track: #111111;
 
-  /* Added for Markdown styling */
-  --code-bg-inline: rgba(255, 255, 255, 0.08); /* Dark theme inline code bg */
-  --code-bg-block: rgba(255, 255, 255, 0.1);  /* Dark theme block code bg */
-  --text-code: #ff8fab; /* Dark theme code text color */
-  --blockquote-bg: rgba(255, 255, 255, 0.05); /* Dark theme blockquote bg */
-  --text-heading: var(--text-primary); /* Heading color */
-  --border-light: rgba(255, 255, 255, 0.15); /* Lighter border for dark theme */
+  /* Markdown styling adjusted for Vercel theme */
+  --code-bg-inline: #222222;
+  --code-bg-block: #111111;
+  --text-code: #f0f0f0;          /* Slightly off-white for code */
+  --blockquote-bg: transparent; /* No background for blockquote */
+  --text-heading: var(--text-primary);
+  --border-light: #444444;       /* Lighter border */
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  /* Using system fonts like Vercel */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-primary);
@@ -55,8 +57,9 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 4px;
+  border: 2px solid var(--scrollbar-track); /* Add border to match track */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-primary);
+  background: #555555; /* Slightly lighter on hover */
 }

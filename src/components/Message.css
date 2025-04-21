@@ -19,34 +19,30 @@
 
 .message-content {
   max-width: 80%;
-  padding: 0.8rem 1.1rem; /* Slightly reduced padding */
-  border-radius: 18px; /* Slightly more rounded */
+  padding: 0.75rem 1rem; /* Adjust padding */
+  border-radius: 6px; /* Less rounded corners */
   position: relative;
-  box-shadow: 0 1px 4px var(--shadow); /* Softer shadow */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: none; /* Remove shadow */
+  transition: none; /* Remove transitions */
 }
 
 .message-content:hover {
-  transform: translateY(-1px); /* Subtle hover effect */
-  box-shadow: 0 2px 8px var(--shadow);
+  /* Remove hover effect */
+  transform: none;
+  box-shadow: none;
 }
 
 .user-message .message-content {
-  background: linear-gradient(to bottom right, var(--message-user), #4a90e2); /* Gradient background */
-  color: white;
-  border-bottom-right-radius: 6px; /* Adjusted radius */
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  border-bottom-left-radius: 18px;
+  background-color: var(--message-user-bg); /* Use variable */
+  color: var(--message-user); /* Use variable */
+  border-radius: 6px; /* Consistent radius */
+  border: 1px solid var(--border); /* Add border like assistant */
 }
 
 .assistant-message .message-content {
-  background-color: var(--message-assistant);
-  color: var(--text-primary);
-  border-bottom-left-radius: 6px; /* Adjusted radius */
-  border-top-left-radius: 18px;
-  border-top-right-radius: 18px;
-  border-bottom-right-radius: 18px;
+  background-color: var(--message-assistant-bg); /* Use variable */
+  color: var(--message-assistant); /* Use variable */
+  border-radius: 6px; /* Consistent radius */
   border: 1px solid var(--border);
 }
 
@@ -62,18 +58,15 @@
 }
 
 .message-time {
-  font-size: 0.65rem; /* Slightly smaller */
-  opacity: 0.6; /* More subtle */
+  font-size: 0.7rem; /* Slightly larger */
+  opacity: 1; /* Full opacity */
   position: absolute;
-  bottom: 0.3rem;
-  right: 0.7rem;
-  color: inherit; /* Inherits color from parent */
+  bottom: 0.4rem;
+  right: 0.75rem;
+  color: var(--text-secondary); /* Use secondary text color */
 }
 
-/* Ensure time color contrasts on user message */
-.user-message .message-time {
-  color: rgba(255, 255, 255, 0.7);
-}
+/* Remove specific user message time color */
 
 .message-image-container {
   margin-bottom: 0.75rem;
@@ -82,8 +75,8 @@
 .message-image {
   max-width: 100%;
   max-height: 300px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px var(--shadow);
+  border-radius: 4px; /* Less rounded */
+  box-shadow: none; /* Remove shadow */
   border: 1px solid var(--border);
 }
 
@@ -118,60 +111,57 @@
 }
 
 .markdown-content code {
-  background-color: var(--code-bg-inline); /* Use CSS variable */
+  background-color: var(--code-bg-inline);
   padding: 0.2em 0.4em;
-  border-radius: 4px; /* Slightly more rounded */
-  font-size: 0.85em; /* Slightly smaller */
-  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* Better font stack */
-  border: 1px solid var(--border-light); /* Subtle border */
+  border-radius: 4px;
+  font-size: 0.875em; /* Slightly larger */
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  border: 1px solid var(--border); /* Use standard border */
+  color: var(--text-secondary); /* Use secondary text color for inline code */
 }
-
-/* No need for specific assistant message code style if using CSS vars properly */
 
 .markdown-content pre {
-  background-color: var(--code-bg-block); /* Use CSS variable */
-  padding: 0.8rem 1rem; /* Adjust padding */
-  border-radius: 8px; /* More rounded */
+  background-color: var(--code-bg-block);
+  padding: 1rem; /* Increase padding */
+  border-radius: 6px; /* Match other radii */
   overflow-x: auto;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
   margin-bottom: 0.75rem;
   border: 1px solid var(--border);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Inner shadow */
+  box-shadow: none; /* Remove inner shadow */
 }
-
-/* No need for specific assistant message pre style if using CSS vars */
 
 .markdown-content pre code {
   background-color: transparent;
   padding: 0;
-  font-size: 0.85em;
-  border: none; /* Remove border from code inside pre */
-  color: var(--text-code); /* Ensure code text color contrasts */
+  font-size: 0.875em;
+  border: none;
+  color: var(--text-code); /* Use specific code text color */
 }
 
 .markdown-content a {
-  color: var(--accent-primary);
-  text-decoration: none;
+  color: var(--text-primary); /* White links */
+  text-decoration: underline; /* Underline by default */
+  text-decoration-color: var(--border); /* Subtle underline color */
+  transition: text-decoration-color 0.2s ease;
 }
 
 .markdown-content a:hover {
-  text-decoration: underline;
+  text-decoration-color: var(--text-primary); /* White underline on hover */
 }
 
-.user-message .markdown-content a {
-  color: #a0cfff; /* Lighter link color for user messages if needed */
-}
+/* Remove user-specific link color */
 
 .markdown-content blockquote {
-  border-left: 3px solid var(--accent-primary); /* Use accent color */
+  border-left: 2px solid var(--border); /* Thinner, standard border color */
   padding-left: 1rem;
   margin-left: 0;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem; /* Adjust margin */
   margin-bottom: 0.75rem;
   color: var(--text-secondary);
-  font-style: italic;
-  background-color: var(--blockquote-bg); /* Subtle background */
-  border-radius: 0 4px 4px 0; /* Rounded corners on the right */
+  font-style: normal; /* Remove italic */
+  background-color: var(--blockquote-bg); /* Use variable (transparent) */
+  border-radius: 0; /* No radius */
 }
 
 .markdown-content hr {
@@ -186,17 +176,19 @@
 .markdown-content h4,
 .markdown-content h5,
 .markdown-content h6 {
-  margin-top: 0.8rem; /* Adjust spacing */
-  margin-bottom: 0.4rem;
+  margin-top: 1.5rem; /* Increase top margin */
+  margin-bottom: 0.5rem;
   font-weight: 600;
   line-height: 1.3;
-  color: var(--text-heading); /* Use heading color variable */
+  color: var(--text-heading);
+  border-bottom: 1px solid var(--border); /* Add bottom border */
+  padding-bottom: 0.3rem; /* Space between text and border */
 }
 
 /* Specific heading sizes */
-.markdown-content h1 { font-size: 1.6em; }
-.markdown-content h2 { font-size: 1.4em; }
-.markdown-content h3 { font-size: 1.2em; }
+.markdown-content h1 { font-size: 1.8em; } /* Larger H1 */
+.markdown-content h2 { font-size: 1.5em; }
+.markdown-content h3 { font-size: 1.3em; }
 .markdown-content h4 { font-size: 1.1em; }
 .markdown-content h5 { font-size: 1.0em; }
-.markdown-content h6 { font-size: 0.9em; color: var(--text-secondary); }
+.markdown-content h6 { font-size: 0.9em; color: var(--text-secondary); border-bottom: none; } /* No border for H6 */
