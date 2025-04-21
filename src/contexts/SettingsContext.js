@@ -6,7 +6,7 @@ export const DEFAULT_SYSTEM_INSTRUCTION = "You are a Hangul-fluent Korean-to-Eng
 
 export const SettingsProvider = ({ children }) => {
   const [apiKey, setApiKey] = useState('');
-  const [model, setModel] = useState('anthropic/claude-3-opus-20240229');
+  const [model, setModel] = useState('google/gemini-2.0-flash-001'); // Set default model to Gemini Flash 2.0
   const [systemInstruction, setSystemInstruction] = useState(DEFAULT_SYSTEM_INSTRUCTION); // Add state for system instruction
   const [loading, setLoading] = useState(false);
 
