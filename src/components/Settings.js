@@ -19,11 +19,11 @@ const Settings = () => {
   const { apiKey, setApiKey, model, setModel } = useContext(SettingsContext);
   const [customModel, setCustomModel] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
-  
+
   const handleApiKeyChange = (e) => {
     setApiKey(e.target.value);
   };
-  
+
   const handleModelChange = (e) => {
     const selectedModel = e.target.value;
     if (selectedModel === 'custom') {
@@ -33,22 +33,22 @@ const Settings = () => {
       setModel(selectedModel);
     }
   };
-  
+
   const handleCustomModelChange = (e) => {
     setCustomModel(e.target.value);
   };
-  
+
   const handleCustomModelSubmit = () => {
     if (customModel.trim()) {
       setModel(customModel.trim());
       setShowCustomInput(false);
     }
   };
-  
+
   return (
     <div className="settings-container">
       <h2>Settings</h2>
-      
+
       <div className="settings-section">
         <h3>OpenRouter API Key</h3>
         <p>Enter your OpenRouter API key to use the translation service.</p>
@@ -63,12 +63,12 @@ const Settings = () => {
           Don't have an API key? <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">Get one from OpenRouter</a>
         </p>
       </div>
-      
+
       <div className="settings-section">
         <h3>Model Selection</h3>
         <p>Choose which AI model to use for translations.</p>
-        <select 
-          value={POPULAR_MODELS.some(m => m.id === model) ? model : 'custom'} 
+        <select
+          value={POPULAR_MODELS.some(m => m.id === model) ? model : 'custom'}
           onChange={handleModelChange}
           className="settings-select"
         >
@@ -77,7 +77,7 @@ const Settings = () => {
           ))}
           <option value="custom">Custom Model</option>
         </select>
-        
+
         {showCustomInput && (
           <div className="custom-model-input">
             <input
@@ -92,17 +92,16 @@ const Settings = () => {
             </button>
           </div>
         )}
-        
+
         <p className="settings-help">
           Current model: <code>{model}</code>
         </p>
       </div>
-      
+
       <div className="settings-info">
-        <h3>About This App</h3>
+        <h3>About Archon</h3>
         <p>
-          This app uses AI models through OpenRouter to provide translation services.
-          Your API key is stored locally on your device and is never sent to our servers.
+          Archon is a language translation app that uses AI models provided through OpenRouter. Your API key is stored locally and it nor your chat history is sent to our servers.
         </p>
       </div>
     </div>
