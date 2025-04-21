@@ -141,3 +141,15 @@
   border-color: var(--accent-primary); /* Keep border consistent with focus */
   animation: glow 1.3s infinite ease-in-out; /* Slightly faster animation */
 }
+
+/* Drag over effect */
+.chat-container.drag-over {
+  border: 2px dashed var(--accent-primary); /* Dashed border */
+  background-color: rgba(255, 255, 255, 0.05); /* Slight background tint */
+}
+
+/* Ensure drag effect covers the whole area, adjust padding if needed */
+.chat-container.drag-over .messages-container,
+.chat-container.drag-over .input-container {
+  pointer-events: none; /* Prevent child elements from interfering with drop */
+}
