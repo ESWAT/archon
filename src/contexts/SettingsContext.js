@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const SettingsContext = createContext();
 
-const DEFAULT_SYSTEM_INSTRUCTION = "You are a helpful language teacher. Your task is to translate the user's text into English. If the text is already in English, help improve it or explain any idioms or complex phrases. Always respond in English, and be educational in your responses.";
+export const DEFAULT_SYSTEM_INSTRUCTION = "You are a helpful language teacher. Your task is to translate the user's text into English. If the text is already in English, help improve it or explain any idioms or complex phrases. Always respond in English, and be educational in your responses.";
 
 export const SettingsProvider = ({ children }) => {
   const [apiKey, setApiKey] = useState('');
