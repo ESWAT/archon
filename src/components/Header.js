@@ -10,7 +10,7 @@ const Header = ({ onClearChat }) => {
     <header className="header">
       <div className="logo">
         <FaLanguage size={24} />
-        <h1>Language Teacher</h1>
+        <h1>Archon</h1>
       </div>
       <nav className="nav-buttons">
         {location.pathname === '/settings' ? (

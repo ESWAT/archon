@@ -28,7 +28,7 @@ const ChatInterface = (props) => {
       const welcomeMessage = {
         id: Date.now(),
         role: 'assistant',
-        content: "Hello! I'm your language teacher. I can help translate text or images into English. How can I assist you today?",
+        content: "Hello! I'm Archon. I can help translate text or images into English. How can I assist you today?",
         timestamp: new Date().toISOString()
       };
       setMessages([welcomeMessage]);
@@ -172,7 +172,7 @@ const ChatInterface = (props) => {
     const welcomeMessage = {
       id: Date.now(),
       role: 'assistant',
-      content: "Hello! I'm your language teacher. I can help translate text or images into English. How can I assist you today?",
+      content: "Hello! I'm Archon. I can help translate text or images into English. How can I assist you today?",
       timestamp: new Date().toISOString()
     };
     setMessages([welcomeMessage]);
