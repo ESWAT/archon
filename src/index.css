@@ -32,6 +32,7 @@ html, body {
   height: 100%; /* Ensure html and body take full height */
   overflow: hidden; /* Prevent scrolling on the body itself */
   margin: 0;
+  background-color: var(--bg-primary);
 }
 
 body {
