@@ -237,6 +237,7 @@ const ChatInterface = (props) => {
           setImagePreview(reader.result);
         };
         reader.readAsDataURL(file);
+        inputRef.current?.focus(); // Focus the input field after dropping an image
       }
       // Clear the data transfer buffer
       if (e.dataTransfer.items) {
