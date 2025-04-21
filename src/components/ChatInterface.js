@@ -5,7 +5,7 @@ import './ChatInterface.css';
 import Message from './Message';
 import { translateText, translateImage } from '../services/translationService';
 
-const ChatInterface = () => {
+const ChatInterface = (props) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [image, setImage] = useState(null);
@@ -183,7 +183,7 @@ const ChatInterface = () => {
     if (props.clearTrigger > 0) {
       clearChat();
     }
-  }, [props.clearTrigger]);
+  }, [props.clearTrigger, clearChat]);
 
   return (
     <div className="chat-container">
