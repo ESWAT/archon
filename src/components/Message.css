@@ -19,28 +19,39 @@
 
 .message-content {
   max-width: 80%;
-  padding: 1rem 1.25rem;
-  border-radius: 16px;
+  padding: 0.8rem 1.1rem; /* Slightly reduced padding */
+  border-radius: 18px; /* Slightly more rounded */
   position: relative;
-  box-shadow: 0 2px 10px var(--shadow);
-  transition: transform 0.2s ease;
+  box-shadow: 0 1px 4px var(--shadow); /* Softer shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .message-content:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px); /* Subtle hover effect */
+  box-shadow: 0 2px 8px var(--shadow);
 }
 
 .user-message .message-content {
-  background-color: var(--message-user);
+  background: linear-gradient(to bottom right, var(--message-user), #4a90e2); /* Gradient background */
   color: white;
-  border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 6px; /* Adjusted radius */
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border-bottom-left-radius: 18px;
 }
 
 .assistant-message .message-content {
   background-color: var(--message-assistant);
   color: var(--text-primary);
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 6px; /* Adjusted radius */
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
   border: 1px solid var(--border);
+}
+
+.message-content p:first-child {
+  margin-top: 0; /* Ensure no extra space at the top */
 }
 
 .message-content p {
@@ -51,12 +62,17 @@
 }
 
 .message-time {
-  font-size: 0.7rem;
-  opacity: 0.7;
+  font-size: 0.65rem; /* Slightly smaller */
+  opacity: 0.6; /* More subtle */
   position: absolute;
-  bottom: 0.4rem;
-  right: 0.8rem;
-  color: inherit;
+  bottom: 0.3rem;
+  right: 0.7rem;
+  color: inherit; /* Inherits color from parent */
+}
+
+/* Ensure time color contrasts on user message */
+.user-message .message-time {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .message-image-container {
@@ -83,7 +99,8 @@
 }
 
 .markdown-content p {
-  margin-bottom: 0.75rem; /* Add space between paragraphs */
+  margin-bottom: 0.5rem; /* Reduced space between paragraphs */
+  line-height: 1.6; /* Ensure consistent line height */
 }
 
 .markdown-content p:last-child {
@@ -101,33 +118,35 @@
 }
 
 .markdown-content code {
-  background-color: rgba(0, 0, 0, 0.05); /* Subtle background for inline code */
+  background-color: var(--code-bg-inline); /* Use CSS variable */
   padding: 0.2em 0.4em;
-  border-radius: 3px;
-  font-size: 0.9em;
-  font-family: 'Courier New', Courier, monospace;
+  border-radius: 4px; /* Slightly more rounded */
+  font-size: 0.85em; /* Slightly smaller */
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* Better font stack */
+  border: 1px solid var(--border-light); /* Subtle border */
 }
 
-.assistant-message .markdown-content code {
-  background-color: rgba(255, 255, 255, 0.1); /* Slightly different for dark assistant bubble */
-}
+/* No need for specific assistant message code style if using CSS vars properly */
 
 .markdown-content pre {
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 0.75rem;
-  border-radius: 6px;
-  overflow-x: auto; /* Allow horizontal scrolling for long code blocks */
+  background-color: var(--code-bg-block); /* Use CSS variable */
+  padding: 0.8rem 1rem; /* Adjust padding */
+  border-radius: 8px; /* More rounded */
+  overflow-x: auto;
+  margin-top: 0.5rem;
   margin-bottom: 0.75rem;
+  border: 1px solid var(--border);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* Inner shadow */
 }
 
-.assistant-message .markdown-content pre {
-  background-color: rgba(0, 0, 0, 0.2); /* Darker background for code blocks in assistant messages */
-}
+/* No need for specific assistant message pre style if using CSS vars */
 
 .markdown-content pre code {
-  background-color: transparent; /* Code inside pre shouldn't have its own background */
+  background-color: transparent;
   padding: 0;
   font-size: 0.85em;
+  border: none; /* Remove border from code inside pre */
+  color: var(--text-code); /* Ensure code text color contrasts */
 }
 
 .markdown-content a {
@@ -144,12 +163,21 @@
 }
 
 .markdown-content blockquote {
-  border-left: 4px solid var(--border);
+  border-left: 3px solid var(--accent-primary); /* Use accent color */
   padding-left: 1rem;
   margin-left: 0;
+  margin-top: 0.5rem;
   margin-bottom: 0.75rem;
   color: var(--text-secondary);
   font-style: italic;
+  background-color: var(--blockquote-bg); /* Subtle background */
+  border-radius: 0 4px 4px 0; /* Rounded corners on the right */
+}
+
+.markdown-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1rem 0;
 }
 
 .markdown-content h1,
@@ -158,7 +186,17 @@
 .markdown-content h4,
 .markdown-content h5,
 .markdown-content h6 {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.8rem; /* Adjust spacing */
+  margin-bottom: 0.4rem;
   font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-heading); /* Use heading color variable */
 }
+
+/* Specific heading sizes */
+.markdown-content h1 { font-size: 1.6em; }
+.markdown-content h2 { font-size: 1.4em; }
+.markdown-content h3 { font-size: 1.2em; }
+.markdown-content h4 { font-size: 1.1em; }
+.markdown-content h5 { font-size: 1.0em; }
+.markdown-content h6 { font-size: 0.9em; color: var(--text-secondary); }

@@ -15,6 +15,14 @@
   --message-assistant: #2a2a2a;
   --scrollbar-thumb: #555;
   --scrollbar-track: #222;
+
+  /* Added for Markdown styling */
+  --code-bg-inline: rgba(255, 255, 255, 0.08); /* Dark theme inline code bg */
+  --code-bg-block: rgba(255, 255, 255, 0.1);  /* Dark theme block code bg */
+  --text-code: #ff8fab; /* Dark theme code text color */
+  --blockquote-bg: rgba(255, 255, 255, 0.05); /* Dark theme blockquote bg */
+  --text-heading: var(--text-primary); /* Heading color */
+  --border-light: rgba(255, 255, 255, 0.15); /* Lighter border for dark theme */
 }
 
 body {
