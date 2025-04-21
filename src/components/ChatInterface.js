@@ -70,6 +70,29 @@ const ChatInterface = () => {
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
+  
+  const handlePaste = (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') !== -1) {
+        const file = items[i].getAsFile();
+        if (file) {
+          e.preventDefault();
+          setImage(file);
+          
+          // Create image preview
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          };
+          reader.readAsDataURL(file);
+          break;
+        }
+      }
+    }
+  };
 
   const clearImage = () => {
     setImage(null);
@@ -181,7 +204,8 @@ const ChatInterface = () => {
             type="text"
             value={input}
             onChange={handleInputChange}
-            placeholder="Type a message in any language..."
+            onPaste={handlePaste}
+            placeholder="Type a message in any language or paste an image..."
             disabled={loading}
             className="message-input"
           />
