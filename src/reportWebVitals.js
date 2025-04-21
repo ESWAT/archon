@@ -1,13 +1,6 @@
-const reportWebVitals = (onPerfEntry) => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
+// Web Vitals reporting removed as it's not currently needed.
+const reportWebVitals = () => {
+  // console.log('Web Vitals reporting is disabled.');
 };
 
 export default reportWebVitals;

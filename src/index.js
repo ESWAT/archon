@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+// Import for unregistering, but we'll call it directly
+import { unregister } from './serviceWorkerRegistration'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,15 +12,5 @@ root.render(
   </React.StrictMode>
 );
 
-// Register the service worker for offline capabilities
-serviceWorkerRegistration.register({
-  onUpdate: registration => {
-    // When a new version is available, show a notification
-    const updateAvailable = window.confirm(
-      'A new version of the app is available. Load the new version?'
-    );
-    if (updateAvailable) {
-      window.location.reload();
-    }
-  }
-});
+// Unregister the service worker to remove offline functionality
+unregister();
