@@ -22,7 +22,7 @@ const Message = ({ message }) => {
           </div>
         )}
         {isUser ? (
-          <p>{content}</p> // Render user content as plain text
+          <p>{content}</p> {/* Render user content as plain text */}
         ) : (
           <div className="markdown-content">
             {/* Add rehypeRaw to handle potential HTML tags */}

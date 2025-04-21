@@ -108,13 +108,13 @@ const Settings = () => {
         <h3>System Instruction</h3>
         <p>Define how the AI should behave. This instruction is sent at the start of each new conversation.</p>
         <textarea
-          value={systemInstruction}
-          onChange={handleSystemInstructionChange}
-          placeholder={DEFAULT_SYSTEM_INSTRUCTION} // Show default as placeholder
-          className="settings-input" // Reuse existing style, maybe create a dedicated textarea style later
-          rows="6" // Give it some height
-        />
-        <p className="settings-help">
+         value={systemInstruction}
+         onChange={handleSystemInstructionChange}
+         placeholder={DEFAULT_SYSTEM_INSTRUCTION} {/* Show default as placeholder */}
+         className="settings-input" {/* Reuse existing style, maybe create a dedicated textarea style later */}
+         rows="6" {/* Give it some height */}
+       />
+       <p className="settings-help">
           This instruction guides the AI's responses for both text and image inputs. Clear the chat to apply changes to a new conversation.
         </p>
       </div>
