@@ -10,7 +10,7 @@ const ChatInterface = (props) => {
   const [input, setInput] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
-  const [isDragging, setIsDragging] = useState(false); // State for drag-over effect
+  const [isDragging, setIsDragging] = useState(false);
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
   const inputRef = useRef(null);
@@ -209,7 +209,6 @@ const ChatInterface = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.clearTrigger]);
 
-  // --- Drag and Drop Handlers ---
   const handleDragOver = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -247,7 +246,6 @@ const ChatInterface = (props) => {
       }
     }
   };
-  // --- End Drag and Drop Handlers ---
 
   return (
     <div

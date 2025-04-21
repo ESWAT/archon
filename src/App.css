@@ -7,12 +7,12 @@
   background-color: var(--bg-primary);
   box-shadow: 0 0 20px var(--shadow);
   border-radius: 0;
-  overflow: hidden; /* Prevent the whole app from scrolling */
+  overflow: hidden;
 }
 
 .main-content {
-  flex: 1; /* Take up remaining vertical space */
-  overflow: hidden; /* Prevent this container from scrolling */
+  flex: 1;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }

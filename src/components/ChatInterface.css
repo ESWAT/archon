@@ -1,24 +1,28 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100%; /* Fill parent container */
   background-color: var(--bg-primary);
+  /* Prevent this container from scrolling if parent manages overall layout */
+  overflow: hidden;
 }
 
 .messages-container {
-  flex: 1;
-  overflow-y: auto;
+  flex: 1; /* Take up available vertical space */
+  overflow-y: auto; /* Enable vertical scrolling ONLY for messages */
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   background-color: var(--bg-primary);
+  min-height: 0; /* Important for flex children to prevent overflow */
 }
 
 .input-container {
-  padding: 1rem 1.5rem; /* Match header horizontal padding */
+  padding: 1rem 1.5rem;
   border-top: 1px solid var(--border);
-  background-color: var(--bg-primary); /* Match header background */
+  background-color: var(--bg-primary);
+  flex-shrink: 0; /* Prevent the input area from shrinking */
 }
 
 .input-wrapper {
@@ -144,12 +148,12 @@
 
 /* Drag over effect */
 .chat-container.drag-over {
-  border: 2px dashed var(--accent-primary); /* Dashed border */
-  background-color: rgba(255, 255, 255, 0.05); /* Slight background tint */
+  border: 2px dashed var(--accent-primary);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Ensure drag effect covers the whole area, adjust padding if needed */
+/* Ensure drag effect covers the whole area */
 .chat-container.drag-over .messages-container,
 .chat-container.drag-over .input-container {
-  pointer-events: none; /* Prevent child elements from interfering with drop */
+  pointer-events: none;
 }
