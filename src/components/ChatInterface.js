@@ -15,13 +15,17 @@ const ChatInterface = (props) => {
   const inputRef = useRef(null); // Ref for the text input
   const { apiKey, model, loading, setLoading } = useContext(SettingsContext);
 
-  // Focus input on '/' key press
+  // Focus input on '/' key press, blur on 'Escape'
   useEffect(() => {
     const handleKeyDown = (event) => {
       // Check if the key pressed is '/' and the target is not an input or textarea
       if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(event.target.tagName)) {
         event.preventDefault(); // Prevent typing '/' in the body
         inputRef.current?.focus();
+      } 
+      // Check if the key pressed is 'Escape' and the input is focused
+      else if (event.key === 'Escape' && document.activeElement === inputRef.current) {
+        inputRef.current?.blur();
       }
     };
 
