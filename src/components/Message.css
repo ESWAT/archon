@@ -159,6 +159,15 @@
   border-radius: 0; /* No radius */
 }
 
+/* Remove margins from paragraphs inside blockquotes */
+.markdown-content blockquote p {
+  margin-bottom: 0; /* Remove bottom margin */
+}
+.markdown-content blockquote p:last-child {
+  margin-bottom: 0; /* Ensure last paragraph also has no bottom margin */
+}
+
+
 .markdown-content hr {
   border: none;
   border-top: 1px solid var(--border);
