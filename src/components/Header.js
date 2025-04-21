@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaCog, FaLanguage, FaTrash } from 'react-icons/fa';
+import { FaCog, FaLanguage, FaTrash, FaComment } from 'react-icons/fa'; // Import FaComment
 import './Header.css';
 
 const Header = ({ onClearChat }) => {
@@ -15,6 +15,7 @@ const Header = ({ onClearChat }) => {
       <nav className="nav-buttons">
         {location.pathname === '/settings' ? (
           <Link to="/" className="nav-link">
+            <FaComment size={16} /> {/* Add FaComment icon */}
             <span>Chat</span>
           </Link>
         ) : (
