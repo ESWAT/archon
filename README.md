@@ -29,11 +29,14 @@ A Progressive Web App that translates text and images to English using OpenRoute
 
 ## Using the App
 
-1. Go to Settings and enter your OpenRouter API key
-2. Select a model to use for translations
-3. Return to the chat interface
-4. Type text in any language or upload an image with text
-5. Receive translations in English
+1. Start the app and click on the Settings icon in the top-right corner
+2. In the Settings page, enter your OpenRouter API key in the first input field
+3. Select a model to use for translations from the dropdown menu
+4. Return to the chat interface by clicking "Chat" in the top-right corner
+5. Type text in any language or upload an image with text using the image icon
+6. Click the send button to receive translations in English
+
+Your API key is stored securely in your browser's local storage and is only sent to OpenRouter when making translation requests.
 
 ## Getting an OpenRouter API Key
 
