@@ -8,11 +8,11 @@ import { SettingsProvider } from './contexts/SettingsContext';
 
 function App() {
   const [clearChatTrigger, setClearChatTrigger] = useState(0);
-  
+
   const handleClearChat = () => {
     setClearChatTrigger(prev => prev + 1);
   };
-  
+
   return (
     <SettingsProvider>
       <Router>

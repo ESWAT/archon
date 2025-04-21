@@ -16,28 +16,23 @@ const ChatInterface = (props) => {
   const inputRef = useRef(null);
   const { apiKey, model, systemInstruction, loading, setLoading } = useContext(SettingsContext);
 
+  // --- Effects ---
+
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      
+    const handleGlobalKeyDown = (event) => {
       if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(event.target.tagName)) {
-        event.preventDefault(); 
+        event.preventDefault();
         inputRef.current?.focus();
-      } 
-      
-      else if (event.key === 'Escape' && document.activeElement === inputRef.current) {
+      } else if (event.key === 'Escape' && document.activeElement === inputRef.current) {
         inputRef.current?.blur();
       }
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    
+    window.addEventListener('keydown', handleGlobalKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleGlobalKeyDown);
     };
-  }, []); 
+  }, []);
 
-  
   useEffect(() => {
     const savedMessages = localStorage.getItem('chat_messages');
     if (savedMessages) {
@@ -45,85 +40,44 @@ const ChatInterface = (props) => {
         setMessages(JSON.parse(savedMessages));
       } catch (e) {
         console.error('Failed to parse saved messages', e);
+        localStorage.removeItem('chat_messages'); // Clear corrupted data
+        setMessages([getWelcomeMessage()]);
       }
     } else {
-      
-      const welcomeMessage = {
-        id: Date.now(),
-        role: 'assistant',
-        content: "Hello! I'm Archon. I can help translate text or images into English. How can I assist you today?",
-        timestamp: new Date().toISOString()
-      };
-      setMessages([welcomeMessage]);
+      setMessages([getWelcomeMessage()]);
     }
   }, []);
 
-  
   useEffect(() => {
     localStorage.setItem('chat_messages', JSON.stringify(messages));
   }, [messages]);
 
-  
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (props.clearTrigger > 0) {
+      clearChat();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.clearTrigger]);
+
+  // --- Helper Functions ---
+
+  const getWelcomeMessage = () => ({
+    id: Date.now(),
+    role: 'assistant',
+    content: "Hello! I'm Archon. I can help translate text or images into English. How can I assist you today?",
+    timestamp: new Date().toISOString()
+  });
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleInputChange = (e) => {
-    setInput(e.target.value);
-  };
-
-  // Handle Enter key press for submission
-  const handleKeyDown = (e) => {
-    // Check if Enter key is pressed without the Shift key
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault(); // Prevent default form submission or newline insertion
-      handleSubmit(e); // Call the existing submit handler
-    }
-  };
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      
-      
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleImageClick = () => {
-    fileInputRef.current.click();
-  };
-  
-  const handlePaste = (e) => {
-    const items = e.clipboardData?.items;
-    if (!items) return;
-    
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].type.indexOf('image') !== -1) {
-        const file = items[i].getAsFile();
-        if (file) {
-          e.preventDefault();
-          setImage(file);
-          
-          
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            setImagePreview(reader.result);
-          };
-          reader.readAsDataURL(file);
-          break;
-        }
-      }
-    }
+  const clearChat = () => {
+    setMessages([getWelcomeMessage()]);
   };
 
   const clearImage = () => {
@@ -134,89 +88,59 @@ const ChatInterface = (props) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if ((!input.trim() && !image) || loading) return;
-    
-    if (!apiKey) {
-      const newMessage = {
-        id: Date.now(),
-        role: 'assistant',
-        content: "Please set your OpenRouter API key in the settings before using the translation service.",
-        timestamp: new Date().toISOString()
-      };
-      setMessages([...messages, newMessage]);
-      return;
-    }
+  const addMessage = (message) => {
+    setMessages(prev => [...prev, message]);
+  };
 
-    
-    const userMessage = {
-      id: Date.now(),
-      role: 'user',
-      content: input,
-      image: imagePreview,
-      timestamp: new Date().toISOString()
-    };
-    
-    setMessages([...messages, userMessage]);
-    setInput('');
-    clearImage(); 
-    setLoading(true);
-    
-    try {
-      let response;
-      
-      if (image) {
-        
-        response = await translateImage(image, apiKey, model, systemInstruction); 
-        clearImage();
-      } else {
-        
-        response = await translateText(input, apiKey, model, systemInstruction); 
+  // --- Event Handlers ---
+
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handlePaste = (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') !== -1) {
+        const file = items[i].getAsFile();
+        if (file) {
+          e.preventDefault();
+          setImage(file);
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setImagePreview(reader.result);
+          };
+          reader.readAsDataURL(file);
+          break;
+        }
       }
-      
-      const assistantMessage = {
-        id: Date.now(),
-        role: 'assistant',
-        content: response,
-        timestamp: new Date().toISOString()
-      };
-      
-      setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
-      console.error('Translation error:', error);
-      
-      const errorMessage = {
-        id: Date.now(),
-        role: 'assistant',
-        content: `Sorry, there was an error processing your request: ${error.message}`,
-        timestamp: new Date().toISOString()
-      };
-      
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setLoading(false);
     }
   };
-
-  const clearChat = () => {
-    const welcomeMessage = {
-      id: Date.now(),
-      role: 'assistant',
-      content: "Hello! I'm Archon. I can help translate text or images into English. How can I assist you today?",
-      timestamp: new Date().toISOString()
-    };
-    setMessages([welcomeMessage]);
-  };
-
-  
-  useEffect(() => {
-    if (props.clearTrigger > 0) {
-      clearChat();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.clearTrigger]);
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -238,7 +162,6 @@ const ChatInterface = (props) => {
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
       const file = files[0];
-      // Check if the dropped file is an image
       if (file.type.startsWith('image/')) {
         setImage(file);
         const reader = new FileReader();
@@ -246,9 +169,8 @@ const ChatInterface = (props) => {
           setImagePreview(reader.result);
         };
         reader.readAsDataURL(file);
-        inputRef.current?.focus(); // Focus the input field after dropping an image
+        inputRef.current?.focus();
       }
-      // Clear the data transfer buffer
       if (e.dataTransfer.items) {
         e.dataTransfer.items.clear();
       } else {
@@ -256,6 +178,64 @@ const ChatInterface = (props) => {
       }
     }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if ((!input.trim() && !image) || loading) return;
+
+    if (!apiKey) {
+      addMessage({
+        id: Date.now(),
+        role: 'assistant',
+        content: "Please set your OpenRouter API key in the settings before using the translation service.",
+        timestamp: new Date().toISOString()
+      });
+      return;
+    }
+
+    const userMessage = {
+      id: Date.now(),
+      role: 'user',
+      content: input,
+      image: imagePreview, // Keep preview for user message display
+      timestamp: new Date().toISOString()
+    };
+
+    addMessage(userMessage);
+    const currentInput = input; // Store input before clearing
+    const currentImage = image; // Store image before clearing
+    setInput('');
+    clearImage();
+    setLoading(true);
+
+    try {
+      let responseContent;
+      if (currentImage) {
+        responseContent = await translateImage(currentImage, apiKey, model, systemInstruction);
+      } else {
+        responseContent = await translateText(currentInput, apiKey, model, systemInstruction);
+      }
+
+      addMessage({
+        id: Date.now() + 1, // Ensure unique ID
+        role: 'assistant',
+        content: responseContent,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Translation error:', error);
+      addMessage({
+        id: Date.now() + 1, // Ensure unique ID
+        role: 'assistant',
+        content: `Sorry, there was an error processing your request: ${error.message}`,
+        timestamp: new Date().toISOString()
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // --- Render ---
 
   return (
     <div
@@ -270,7 +250,7 @@ const ChatInterface = (props) => {
         ))}
         <div ref={messagesEndRef} />
       </div>
-      
+
       <form onSubmit={handleSubmit} className="input-container">
         {imagePreview && (
           <div className="image-preview-container">
@@ -278,44 +258,43 @@ const ChatInterface = (props) => {
             <button type="button" onClick={clearImage} className="clear-image-button">×</button>
           </div>
         )}
-        
+
         <div className={`input-wrapper ${loading ? 'loading' : ''}`}>
-          
           <input
-            ref={inputRef} 
+            ref={inputRef}
             type="text"
             value={input}
             onChange={handleInputChange}
-            onKeyDown={handleKeyDown} // Add the keydown handler here
+            onKeyDown={handleKeyDown}
             onPaste={handlePaste}
             placeholder="Type message, paste image, or press '/' to focus..."
             disabled={loading}
             className="message-input"
           />
-          
-          <button 
-            type="button" 
-            onClick={handleImageClick} 
+          <button
+            type="button"
+            onClick={handleImageClick}
             className="upload-button"
             disabled={loading}
+            aria-label="Upload image"
           >
             <FaImage />
           </button>
-          
           <input
             type="file"
             ref={fileInputRef}
             onChange={handleImageUpload}
             accept="image/*"
             style={{ display: 'none' }}
+            aria-hidden="true"
           />
-          
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="send-button"
             disabled={(!input.trim() && !image) || loading}
+            aria-label="Send message"
           >
-            {loading ? <FaSpinner className="spinner" /> : <FaPaperPlane />}
+            {loading ? <FaSpinner className="spinner" aria-label="Sending"/> : <FaPaperPlane />}
           </button>
         </div>
       </form>
