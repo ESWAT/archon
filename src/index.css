@@ -36,14 +36,7 @@ body {
   color: var(--text-primary);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-  background-color: var(--bg-tertiary);
-  padding: 0.2rem 0.4rem;
-  border-radius: 3px;
-  font-size: 0.9em;
-}
+/* Removed global code style - specific styles are in Message.css and Settings.css */
 
 * {
   box-sizing: border-box;
