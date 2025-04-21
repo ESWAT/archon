@@ -9,7 +9,8 @@ const Message = ({ message }) => {
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    // Use hour12: false for 24-hour format
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }); 
   };
 
   return (
