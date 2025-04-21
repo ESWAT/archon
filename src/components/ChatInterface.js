@@ -13,7 +13,7 @@ const ChatInterface = (props) => {
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
   const inputRef = useRef(null); // Ref for the text input
-  const { apiKey, model, loading, setLoading } = useContext(SettingsContext);
+  const { apiKey, model, systemInstruction, loading, setLoading } = useContext(SettingsContext); // Get systemInstruction
 
   // Focus input on '/' key press, blur on 'Escape'
   useEffect(() => {
@@ -160,11 +160,11 @@ const ChatInterface = (props) => {
       
       if (image) {
         // Handle image translation
-        response = await translateImage(image, apiKey, model);
+        response = await translateImage(image, apiKey, model, systemInstruction); // Pass systemInstruction
         clearImage();
       } else {
         // Handle text translation
-        response = await translateText(input, apiKey, model);
+        response = await translateText(input, apiKey, model, systemInstruction); // Pass systemInstruction
       }
       
       const assistantMessage = {

@@ -11,16 +11,19 @@ export const SettingsProvider = ({ children }) => {
   useEffect(() => {
     const savedApiKey = localStorage.getItem('openrouter_api_key');
     const savedModel = localStorage.getItem('openrouter_model');
+    const savedSystemInstruction = localStorage.getItem('system_instruction'); // Load system instruction
     
     if (savedApiKey) setApiKey(savedApiKey);
     if (savedModel) setModel(savedModel);
+    if (savedSystemInstruction) setSystemInstruction(savedSystemInstruction); // Set loaded instruction
   }, []);
   
   // Save settings to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('openrouter_api_key', apiKey);
     localStorage.setItem('openrouter_model', model);
-  }, [apiKey, model]);
+    localStorage.setItem('system_instruction', systemInstruction); // Save system instruction
+  }, [apiKey, model, systemInstruction]); // Add systemInstruction to dependency array
   
   return (
     <SettingsContext.Provider value={{ 
@@ -28,6 +31,8 @@ export const SettingsProvider = ({ children }) => {
       setApiKey, 
       model, 
       setModel,
+      systemInstruction, // Provide system instruction state
+      setSystemInstruction, // Provide setter for system instruction
       loading,
       setLoading
     }}>

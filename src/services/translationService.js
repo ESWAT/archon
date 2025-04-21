@@ -4,7 +4,7 @@ import axios from 'axios';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // Function to translate text
-export const translateText = async (text, apiKey, model) => {
+export const translateText = async (text, apiKey, model, systemInstruction) => { // Add systemInstruction parameter
   try {
     const response = await axios.post(
       OPENROUTER_API_URL,
@@ -13,7 +13,7 @@ export const translateText = async (text, apiKey, model) => {
         messages: [
           {
             role: 'system',
-            content: 'You are a helpful language teacher. Your task is to translate the user\'s text into English. If the text is already in English, help improve it or explain any idioms or complex phrases. Always respond in English, and be educational in your responses.'
+            content: systemInstruction // Use the passed systemInstruction
           },
           {
             role: 'user',
@@ -39,7 +39,7 @@ export const translateText = async (text, apiKey, model) => {
 };
 
 // Function to translate image (using base64 encoding)
-export const translateImage = async (imageFile, apiKey, model) => {
+export const translateImage = async (imageFile, apiKey, model, systemInstruction) => { // Add systemInstruction parameter
   try {
     // Convert image to base64
     const base64Image = await fileToBase64(imageFile);
@@ -51,7 +51,7 @@ export const translateImage = async (imageFile, apiKey, model) => {
         messages: [
           {
             role: 'system',
-            content: 'You are a helpful language teacher. Your task is to analyze the image, identify any text in it regardless of language, and translate that text into English. Explain the context of the image if relevant. Always respond in English, and be educational in your responses.'
+            content: systemInstruction // Use the passed systemInstruction
           },
           {
             role: 'user',

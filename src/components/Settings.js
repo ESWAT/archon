@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { SettingsContext } from '../contexts/SettingsContext';
 import './Settings.css';
+import { DEFAULT_SYSTEM_INSTRUCTION } from '../contexts/SettingsContext'; // Import default for placeholder
 
 const POPULAR_MODELS = [
   { id: 'google/gemini-flash-1.5-8b', name: 'Gemini 1.5 Flash 8B' },
@@ -16,7 +17,7 @@ const POPULAR_MODELS = [
 ];
 
 const Settings = () => {
-  const { apiKey, setApiKey, model, setModel } = useContext(SettingsContext);
+  const { apiKey, setApiKey, model, setModel, systemInstruction, setSystemInstruction } = useContext(SettingsContext); // Get systemInstruction state and setter
   const [customModel, setCustomModel] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
 
@@ -43,6 +44,10 @@ const Settings = () => {
       setModel(customModel.trim());
       setShowCustomInput(false);
     }
+  };
+  
+  const handleSystemInstructionChange = (e) => {
+    setSystemInstruction(e.target.value);
   };
 
   return (
@@ -97,6 +102,23 @@ const Settings = () => {
           Current model: <code>{model}</code>
         </p>
       </div>
+      
+      {/* New Section for System Instruction */}
+      <div className="settings-section">
+        <h3>System Instruction</h3>
+        <p>Define how the AI should behave. This instruction is sent at the start of each new conversation.</p>
+        <textarea
+          value={systemInstruction}
+          onChange={handleSystemInstructionChange}
+          placeholder={DEFAULT_SYSTEM_INSTRUCTION} // Show default as placeholder
+          className="settings-input" // Reuse existing style, maybe create a dedicated textarea style later
+          rows="6" // Give it some height
+        />
+        <p className="settings-help">
+          This instruction guides the AI's responses for both text and image inputs. Clear the chat to apply changes to a new conversation.
+        </p>
+      </div>
+
 
       <div className="settings-info">
         <h3>About Archon</h3>
