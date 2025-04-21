@@ -76,6 +76,15 @@ const ChatInterface = (props) => {
     setInput(e.target.value);
   };
 
+  // Handle Enter key press for submission
+  const handleKeyDown = (e) => {
+    // Check if Enter key is pressed without the Shift key
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault(); // Prevent default form submission or newline insertion
+      handleSubmit(e); // Call the existing submit handler
+    }
+  };
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -277,6 +286,7 @@ const ChatInterface = (props) => {
             type="text"
             value={input}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown} // Add the keydown handler here
             onPaste={handlePaste}
             placeholder="Type message, paste image, or press '/' to focus..."
             disabled={loading}
