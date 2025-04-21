@@ -25,7 +25,12 @@
   background-clip: text;
 }
 
-.nav-link {
+.nav-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-link, .nav-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -34,15 +39,18 @@
   padding: 0.6rem 0.8rem;
   border-radius: 8px;
   transition: all 0.2s ease;
-  border: 1px solid transparent;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-button:hover {
   background-color: var(--bg-tertiary);
-  border-color: var(--border);
+  border-color: var(--accent-primary);
 }
 
-.nav-link svg {
+.nav-link svg, .nav-button svg {
   color: var(--accent-primary);
 }
 
@@ -51,11 +59,11 @@
     font-size: 1.2rem;
   }
   
-  .nav-link span {
+  .nav-link span, .nav-button span {
     display: none;
   }
   
-  .nav-link {
+  .nav-link, .nav-button {
     padding: 0.5rem;
   }
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaCog, FaLanguage } from 'react-icons/fa';
+import { FaCog, FaLanguage, FaTrash } from 'react-icons/fa';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ onClearChat }) => {
   const location = useLocation();
   
   return (
@@ -12,16 +12,22 @@ const Header = () => {
         <FaLanguage size={24} />
         <h1>Language Teacher</h1>
       </div>
-      <nav>
+      <nav className="nav-buttons">
         {location.pathname === '/settings' ? (
           <Link to="/" className="nav-link">
             <span>Chat</span>
           </Link>
         ) : (
-          <Link to="/settings" className="nav-link">
-            <FaCog size={20} />
-            <span>Settings</span>
-          </Link>
+          <>
+            <button onClick={onClearChat} className="nav-button">
+              <FaTrash size={16} />
+              <span>Clear</span>
+            </button>
+            <Link to="/settings" className="nav-link">
+              <FaCog size={16} />
+              <span>Settings</span>
+            </Link>
+          </>
         )}
       </nav>
     </header>

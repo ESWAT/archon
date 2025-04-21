@@ -5,38 +5,6 @@
   background-color: var(--bg-primary);
 }
 
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid var(--border);
-  background-color: var(--bg-secondary);
-}
-
-.chat-header h2 {
-  margin: 0;
-  color: var(--accent-primary);
-  font-weight: 600;
-}
-
-.clear-chat-button {
-  background-color: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.clear-chat-button:hover {
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-}
-
 .messages-container {
   flex: 1;
   overflow-y: auto;

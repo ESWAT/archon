@@ -178,13 +178,15 @@ const ChatInterface = () => {
     setMessages([welcomeMessage]);
   };
 
+  // Listen for clear chat trigger from App component
+  useEffect(() => {
+    if (props.clearTrigger > 0) {
+      clearChat();
+    }
+  }, [props.clearTrigger]);
+
   return (
     <div className="chat-container">
-      <div className="chat-header">
-        <h2>Language Teacher</h2>
-        <button onClick={clearChat} className="clear-chat-button">Clear Chat</button>
-      </div>
-      
       <div className="messages-container">
         {messages.map((message) => (
           <Message key={message.id} message={message} />
