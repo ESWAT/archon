@@ -19,7 +19,11 @@ const Message = ({ message }) => {
             <img src={image} alt="User uploaded" className="message-image" />
           </div>
         )}
-        <p>{content}</p>
+        {isUser ? (
+          <p>{content}</p> // Render user content as plain text
+        ) : (
+          <ReactMarkdown className="markdown-content">{content}</ReactMarkdown> // Render assistant content as Markdown, add class for styling
+        )}
         <span className="message-time">{formatTime(timestamp)}</span>
       </div>
     </div>
