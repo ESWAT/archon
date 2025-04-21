@@ -5,16 +5,17 @@
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/x-icon" 
+      // Note: Ensure public/favicon.ico is updated with the new logo
     },
     {
-      "src": "logo192.png",
+      "src": "logo192.png", // Ensure public/logo192.png is updated
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "logo512.png", // Ensure public/logo512.png is updated
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"

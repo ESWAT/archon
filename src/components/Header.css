@@ -15,6 +15,15 @@
   gap: 0.75rem;
 }
 
+/* Style for the Hangul character logo */
+.logo-icon-hangul {
+  font-size: 1.8rem; /* Adjust size as needed */
+  font-weight: bold;
+  line-height: 1; /* Ensure proper vertical alignment */
+  color: var(--text-primary); /* Match text color */
+  /* Add any other desired styling (e.g., slight margin-right) */
+}
+
 .logo h1 {
   margin: 0;
   font-size: 1.3rem; /* Slightly smaller */
