@@ -12,7 +12,26 @@ const ChatInterface = (props) => {
   const [imagePreview, setImagePreview] = useState('');
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
+  const inputRef = useRef(null); // Ref for the text input
   const { apiKey, model, loading, setLoading } = useContext(SettingsContext);
+
+  // Focus input on '/' key press
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      // Check if the key pressed is '/' and the target is not an input or textarea
+      if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(event.target.tagName)) {
+        event.preventDefault(); // Prevent typing '/' in the body
+        inputRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   // Load messages from localStorage on initial render
   useEffect(() => {
@@ -204,11 +223,12 @@ const ChatInterface = (props) => {
         
         <div className="input-wrapper">
           <input
+            ref={inputRef} // Assign the ref to the input
             type="text"
             value={input}
             onChange={handleInputChange}
             onPaste={handlePaste}
-            placeholder="Type a message in any language or paste an image..."
+            placeholder="Type message, paste image, or press '/' to focus..."
             disabled={loading}
             className="message-input"
           />
