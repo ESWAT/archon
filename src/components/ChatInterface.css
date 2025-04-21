@@ -19,7 +19,7 @@
 }
 
 .input-container {
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.5rem;
   border-top: 1px solid var(--border);
   background-color: var(--bg-primary);
   flex-shrink: 0; /* Prevent the input area from shrinking */
@@ -134,7 +134,7 @@
   }
   50% {
     /* Increased spread and opacity */
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 255, 255, 0.5); 
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 255, 255, 0.5);
   }
   100% {
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Match 0% */
