@@ -5,12 +5,12 @@ import './Message.css';
 const Message = ({ message }) => {
   const { role, content, image, timestamp } = message;
   const isUser = role === 'user';
-  
+
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
-  
+
   return (
     <div className={`message ${isUser ? 'user-message' : 'assistant-message'}`}>
       <div className="message-content">
@@ -23,7 +23,7 @@ const Message = ({ message }) => {
           <p>{content}</p> // Render user content as plain text
         ) : (
           <div className="markdown-content">
-            <ReactMarkdown>{content}</ReactMarkdown> // Render assistant content as Markdown
+            <ReactMarkdown>{content}</ReactMarkdown>
           </div>
         )}
         <span className="message-time">{formatTime(timestamp)}</span>
