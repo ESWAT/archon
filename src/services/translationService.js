@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Using HTTPS for the API URL to ensure it works properly in a PWA context
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
 // Function to translate text
