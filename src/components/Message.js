@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown'; // Import ReactMarkdown
+import rehypeRaw from 'rehype-raw'; // Import rehype-raw
 import './Message.css';
 
 const Message = ({ message }) => {
@@ -23,7 +24,8 @@ const Message = ({ message }) => {
           <p>{content}</p> // Render user content as plain text
         ) : (
           <div className="markdown-content">
-            <ReactMarkdown>{content}</ReactMarkdown>
+            {/* Add rehypeRaw to handle potential HTML tags */}
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown> 
           </div>
         )}
         <span className="message-time">{formatTime(timestamp)}</span>
