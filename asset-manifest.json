@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/archon/static/css/main.156a2676.css",
+    "main.css": "/archon/static/css/main.d1e09458.css",
     "main.js": "/archon/static/js/main.2e4e651b.js",
     "index.html": "/archon/index.html",
-    "main.156a2676.css.map": "/archon/static/css/main.156a2676.css.map",
+    "main.d1e09458.css.map": "/archon/static/css/main.d1e09458.css.map",
     "main.2e4e651b.js.map": "/archon/static/js/main.2e4e651b.js.map"
   },
   "entrypoints": [
-    "static/css/main.156a2676.css",
+    "static/css/main.d1e09458.css",
     "static/js/main.2e4e651b.js"
   ]
 }
