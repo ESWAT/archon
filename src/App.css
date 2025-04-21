@@ -4,8 +4,9 @@
   height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 20px var(--shadow);
+  border-radius: 0;
 }
 
 .main-content {
@@ -18,5 +19,6 @@
 @media (max-width: 768px) {
   .app {
     width: 100%;
+    border-radius: 0;
   }
 }
