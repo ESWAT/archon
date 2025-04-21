@@ -22,7 +22,9 @@ const Message = ({ message }) => {
         {isUser ? (
           <p>{content}</p> // Render user content as plain text
         ) : (
-          <ReactMarkdown className="markdown-content">{content}</ReactMarkdown> // Render assistant content as Markdown, add class for styling
+          <div className="markdown-content">
+            <ReactMarkdown>{content}</ReactMarkdown> // Render assistant content as Markdown
+          </div>
         )}
         <span className="message-time">{formatTime(timestamp)}</span>
       </div>
