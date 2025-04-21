@@ -129,6 +129,7 @@ const ChatInterface = () => {
     
     setMessages([...messages, userMessage]);
     setInput('');
+    clearImage(); // Clear the image after submission
     setLoading(true);
     
     try {
