@@ -33,7 +33,7 @@
 
 .input-wrapper:focus-within {
   border-color: var(--accent-primary); /* Use white accent for focus */
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1); /* Subtle white focus ring */
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25); /* Slightly more visible focus ring */
 }
 
 .message-input {
@@ -71,9 +71,9 @@
 }
 
 .upload-button:disabled, .send-button:disabled {
-  color: #555555; /* Darker gray for disabled */
+  color: var(--text-secondary); /* Use secondary text color for disabled */
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.5; /* Adjust opacity for disabled state */
 }
 
 .image-preview-container {
@@ -110,8 +110,8 @@
 }
 
 .clear-image-button:hover {
-  background-color: rgba(255, 0, 0, 0.7); /* Red hover */
-  color: white;
+  background-color: var(--bg-secondary); /* Consistent hover background */
+  color: var(--text-primary); /* Consistent hover text */
 }
 
 .spinner {

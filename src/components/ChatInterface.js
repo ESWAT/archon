@@ -206,7 +206,8 @@ const ChatInterface = (props) => {
     if (props.clearTrigger > 0) {
       clearChat();
     }
-  }, [props.clearTrigger, clearChat]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, [props.clearTrigger]); // Removed clearChat from dependencies
 
   return (
     <div className="chat-container">

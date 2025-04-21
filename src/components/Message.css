@@ -111,7 +111,7 @@
   font-size: 0.875em; /* Slightly larger */
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
   border: 1px solid var(--border); /* Use standard border */
-  color: var(--text-secondary); /* Use secondary text color for inline code */
+  color: var(--text-primary); /* Use primary text color for better contrast */
 }
 
 .markdown-content pre {
