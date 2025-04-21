@@ -1,7 +1,7 @@
 .settings-container {
   padding: 1.5rem;
-  max-width: 800px;
-  margin: 0 auto;
+  /* max-width: 800px; */ /* Removed to allow full width */
+  margin: 0; /* Removed auto margins */
   overflow-y: auto;
   height: 100%;
   color: var(--text-primary);
