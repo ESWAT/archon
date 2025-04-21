@@ -102,8 +102,7 @@ const Settings = () => {
           Current model: <code>{model}</code>
         </p>
       </div>
-      
-      {/* New Section for System Instruction */}
+
       <div className="settings-section">
         <h3>System Instruction</h3>
         <p>Define how the AI should behave. This instruction is sent at the start of each new conversation.</p>
