@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/archon/static/css/main.1747b4dc.css",
+    "main.js": "/archon/static/js/main.d138dfb2.js",
+    "index.html": "/archon/index.html",
+    "main.1747b4dc.css.map": "/archon/static/css/main.1747b4dc.css.map",
+    "main.d138dfb2.js.map": "/archon/static/js/main.d138dfb2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1747b4dc.css",
+    "static/js/main.d138dfb2.js"
+  ]
+}
