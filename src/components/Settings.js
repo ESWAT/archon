@@ -3,14 +3,16 @@ import { SettingsContext } from '../contexts/SettingsContext';
 import './Settings.css';
 
 const POPULAR_MODELS = [
-  { id: 'anthropic/claude-3-opus-20240229', name: 'Claude 3 Opus' },
-  { id: 'anthropic/claude-3-sonnet-20240229', name: 'Claude 3 Sonnet' },
-  { id: 'anthropic/claude-3-haiku-20240307', name: 'Claude 3 Haiku' },
-  { id: 'google/gemini-pro', name: 'Gemini Pro' },
-  { id: 'openai/gpt-4-turbo', name: 'GPT-4 Turbo' },
-  { id: 'openai/gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
-  { id: 'mistralai/mistral-large-latest', name: 'Mistral Large' },
-  { id: 'mistralai/mistral-7b-instruct', name: 'Mistral 7B' }
+  { id: 'google/gemini-flash-1.5-8b', name: 'Gemini 1.5 Flash 8B' },
+  { id: 'google/gemini-2.0-flash-001', name: 'Gemini 2.0 Flash' },
+  { id: 'google/gemini-flash-1.5', name: 'Gemini 1.5 Flash' },
+  { id: 'mistralai/mistral-small-3.1-24b-instruct', name: 'Mistral Small 3.1 24B' },
+  { id: 'openai/gpt-4o-mini', name: 'GPT-4o Mini' },
+  { id: 'google/gemini-2.5-flash-preview', name: 'Gemini 2.5 Flash Preview' },
+  { id: 'deepseek/deepseek-chat-v3-0324', name: 'DeepSeek V3 0324' },
+  { id: 'openai/gpt-4.1-nano', name: 'GPT-4.1 Nano' },
+  { id: 'anthropic/claude-3.7-sonnet', name: 'Claude 3.7 Sonnet' },
+  { id: 'openai/gpt-4o-mini-2024-07-18', name: 'GPT-4o Mini (2024-07-18)' }
 ];
 
 const Settings = () => {
