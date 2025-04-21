@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { SettingsContext } from '../contexts/SettingsContext';
 import './Settings.css';
-import { DEFAULT_SYSTEM_INSTRUCTION } from '../contexts/SettingsContext'; // Import default for placeholder
+import { DEFAULT_SYSTEM_INSTRUCTION } from '../contexts/SettingsContext'; 
 
 const POPULAR_MODELS = [
   { id: 'google/gemini-flash-1.5-8b', name: 'Gemini 1.5 Flash 8B' },
@@ -17,7 +17,7 @@ const POPULAR_MODELS = [
 ];
 
 const Settings = () => {
-  const { apiKey, setApiKey, model, setModel, systemInstruction, setSystemInstruction } = useContext(SettingsContext); // Get systemInstruction state and setter
+  const { apiKey, setApiKey, model, setModel, systemInstruction, setSystemInstruction } = useContext(SettingsContext); 
   const [customModel, setCustomModel] = useState('');
   const [showCustomInput, setShowCustomInput] = useState(false);
 
@@ -110,12 +110,12 @@ const Settings = () => {
         <textarea
          value={systemInstruction}
          onChange={handleSystemInstructionChange}
-         placeholder={DEFAULT_SYSTEM_INSTRUCTION} {/* Show default as placeholder */}
-         className="settings-input" {/* Reuse existing style, maybe create a dedicated textarea style later */}
-         rows="6" {/* Give it some height */}
+         placeholder={DEFAULT_SYSTEM_INSTRUCTION} 
+         className="settings-input" 
+         rows="6" 
        />
        <p className="settings-help">
-          This instruction guides the AI's responses for both text and image inputs. Clear the chat to apply changes to a new conversation.
+         This instruction guides the AI's responses for both text and image inputs. Clear the chat to apply changes to a new conversation.
         </p>
       </div>
 

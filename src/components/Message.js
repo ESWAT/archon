@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown'; // Import ReactMarkdown
-import rehypeRaw from 'rehype-raw'; // Import rehype-raw
+import ReactMarkdown from 'react-markdown'; 
+import rehypeRaw from 'rehype-raw'; 
 import './Message.css';
 
 const Message = ({ message }) => {
@@ -9,7 +9,7 @@ const Message = ({ message }) => {
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
-    // Use hour12: false for 24-hour format
+    
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }); 
   };
 
@@ -22,10 +22,10 @@ const Message = ({ message }) => {
           </div>
         )}
         {isUser ? (
-          <p>{content}</p> {/* Render user content as plain text */}
+          <p>{content}</p> 
         ) : (
           <div className="markdown-content">
-            {/* Add rehypeRaw to handle potential HTML tags */}
+            
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>{content}</ReactMarkdown> 
           </div>
         )}

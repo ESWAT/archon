@@ -12,18 +12,18 @@ const ChatInterface = (props) => {
   const [imagePreview, setImagePreview] = useState('');
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
-  const inputRef = useRef(null); // Ref for the text input
-  const { apiKey, model, systemInstruction, loading, setLoading } = useContext(SettingsContext); // Get systemInstruction
+  const inputRef = useRef(null); 
+  const { apiKey, model, systemInstruction, loading, setLoading } = useContext(SettingsContext); 
 
-  // Focus input on '/' key press, blur on 'Escape'
+  
   useEffect(() => {
     const handleKeyDown = (event) => {
-      // Check if the key pressed is '/' and the target is not an input or textarea
+      
       if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(event.target.tagName)) {
-        event.preventDefault(); // Prevent typing '/' in the body
+        event.preventDefault(); 
         inputRef.current?.focus();
       } 
-      // Check if the key pressed is 'Escape' and the input is focused
+      
       else if (event.key === 'Escape' && document.activeElement === inputRef.current) {
         inputRef.current?.blur();
       }
@@ -31,13 +31,13 @@ const ChatInterface = (props) => {
 
     window.addEventListener('keydown', handleKeyDown);
 
-    // Cleanup listener on component unmount
+    
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, []); 
 
-  // Load messages from localStorage on initial render
+  
   useEffect(() => {
     const savedMessages = localStorage.getItem('chat_messages');
     if (savedMessages) {
@@ -47,7 +47,7 @@ const ChatInterface = (props) => {
         console.error('Failed to parse saved messages', e);
       }
     } else {
-      // Add welcome message if no saved messages
+      
       const welcomeMessage = {
         id: Date.now(),
         role: 'assistant',
@@ -58,12 +58,12 @@ const ChatInterface = (props) => {
     }
   }, []);
 
-  // Save messages to localStorage whenever they change
+  
   useEffect(() => {
     localStorage.setItem('chat_messages', JSON.stringify(messages));
   }, [messages]);
 
-  // Scroll to bottom whenever messages change
+  
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -81,7 +81,7 @@ const ChatInterface = (props) => {
     if (file) {
       setImage(file);
       
-      // Create image preview
+      
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
@@ -105,7 +105,7 @@ const ChatInterface = (props) => {
           e.preventDefault();
           setImage(file);
           
-          // Create image preview
+          
           const reader = new FileReader();
           reader.onloadend = () => {
             setImagePreview(reader.result);
@@ -141,7 +141,7 @@ const ChatInterface = (props) => {
       return;
     }
 
-    // Add user message
+    
     const userMessage = {
       id: Date.now(),
       role: 'user',
@@ -152,19 +152,19 @@ const ChatInterface = (props) => {
     
     setMessages([...messages, userMessage]);
     setInput('');
-    clearImage(); // Clear the image after submission
+    clearImage(); 
     setLoading(true);
     
     try {
       let response;
       
       if (image) {
-        // Handle image translation
-        response = await translateImage(image, apiKey, model, systemInstruction); // Pass systemInstruction
+        
+        response = await translateImage(image, apiKey, model, systemInstruction); 
         clearImage();
       } else {
-        // Handle text translation
-        response = await translateText(input, apiKey, model, systemInstruction); // Pass systemInstruction
+        
+        response = await translateText(input, apiKey, model, systemInstruction); 
       }
       
       const assistantMessage = {
@@ -201,13 +201,13 @@ const ChatInterface = (props) => {
     setMessages([welcomeMessage]);
   };
 
-  // Listen for clear chat trigger from App component
+  
   useEffect(() => {
     if (props.clearTrigger > 0) {
       clearChat();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [props.clearTrigger]); // Removed clearChat from dependencies
+  }, [props.clearTrigger]); 
 
   return (
     <div className="chat-container">
@@ -227,7 +227,7 @@ const ChatInterface = (props) => {
         )}
         
         <div className={`input-wrapper ${loading ? 'loading' : ''}`}>
-          {/* Assign the ref to the input */}
+          
           <input
             ref={inputRef} 
             type="text"
