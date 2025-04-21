@@ -10,12 +10,12 @@ const ChatInterface = (props) => {
   const [input, setInput] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
+  const [isDragging, setIsDragging] = useState(false); // State for drag-over effect
   const messagesEndRef = useRef(null);
   const fileInputRef = useRef(null);
-  const inputRef = useRef(null); 
-  const { apiKey, model, systemInstruction, loading, setLoading } = useContext(SettingsContext); 
+  const inputRef = useRef(null);
+  const { apiKey, model, systemInstruction, loading, setLoading } = useContext(SettingsContext);
 
-  
   useEffect(() => {
     const handleKeyDown = (event) => {
       
@@ -206,11 +206,56 @@ const ChatInterface = (props) => {
     if (props.clearTrigger > 0) {
       clearChat();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [props.clearTrigger]); 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.clearTrigger]);
+
+  // --- Drag and Drop Handlers ---
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      // Check if the dropped file is an image
+      if (file.type.startsWith('image/')) {
+        setImage(file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+      // Clear the data transfer buffer
+      if (e.dataTransfer.items) {
+        e.dataTransfer.items.clear();
+      } else {
+        e.dataTransfer.clearData();
+      }
+    }
+  };
+  // --- End Drag and Drop Handlers ---
 
   return (
-    <div className="chat-container">
+    <div
+      className={`chat-container ${isDragging ? 'drag-over' : ''}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
       <div className="messages-container">
         {messages.map((message) => (
           <Message key={message.id} message={message} />
