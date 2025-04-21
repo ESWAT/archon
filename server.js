@@ -5,6 +5,13 @@ const path = require('path');
 const PORT = process.env.PORT || 8080;
 const BUILD_DIR = path.join(__dirname, 'build');
 
+// Check if build directory exists
+if (!fs.existsSync(BUILD_DIR)) {
+  console.error(`Error: Build directory not found at ${BUILD_DIR}`);
+  console.error('Please run "npm run build" before starting the server');
+  process.exit(1);
+}
+
 const MIME_TYPES = {
   '.html': 'text/html',
   '.js': 'text/javascript',
